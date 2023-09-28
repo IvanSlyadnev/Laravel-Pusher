@@ -31,4 +31,13 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'telegram-bot-api' => [
+        'token' => env('TELEGRAM_BOT_TOKEN', 'YOUR BOT TOKEN HERE')
+    ],
+
+    'search' => [
+        'enabled' => true,
+        'hosts' => explode(',', env('ELASTICSEARCH_HOST', 'http://localhost:9200'))
+    ]
+
 ];

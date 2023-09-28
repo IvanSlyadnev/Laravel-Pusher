@@ -19,8 +19,10 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email',
         'password',
+        'telegram_chat_id',
+        'phone',
+        'code'
     ];
 
     /**
@@ -42,4 +44,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function routeNotificationForTelegram()
+    {
+        return $this->telegram_chat_id;
+    }
+    public function messages() {
+        return $this->hasMany(Message::class, 'user_id');
+    }
 }

@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\TelegramLoginController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -33,6 +34,11 @@ Route::middleware('guest')->group(function () {
 
     Route::post('reset-password', [NewPasswordController::class, 'store'])
                 ->name('password.store');
+
+    Route::get('telegram/login', [TelegramLoginController::class, 'create'])->name('telegram.login_');
+    Route::get('/telegram/{phone}/code/', [TelegramLoginController::class, 'code'])->name('telegram.code');
+    Route::post('telegram/login/', [TelegramLoginController::class, 'login'])->name('telegram.login');
+    Route::post('telegram/auth/{phone}', [TelegramLoginController::class, 'telegramAuth'])->name('telegram.login.auth');
 });
 
 Route::middleware('auth')->group(function () {
